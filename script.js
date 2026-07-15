@@ -76,3 +76,4 @@ addDoc(collection(db, "orders"), order)
         "https://wa.me/233543553686?text=" + encodeURIComponent(message);
     }
 }
+window.buyData = buyData;
