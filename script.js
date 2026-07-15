@@ -1,3 +1,18 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDpD5ShNaSByzGPxF1FlNGS0zgRZPAtnDg",
+  authDomain: "cnd-data-bundle.firebaseapp.com",
+  projectId: "cnd-data-bundle",
+  storageBucket: "cnd-data-bundle.firebasestorage.app",
+  messagingSenderId: "667849737543",
+  appId: "1:667849737543:web:a8571f7123483b4765f862",
+  measurementId: "G-PB7MHHHMYW"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 function buyData(data, price) {
 
     let name = document.getElementById("name").value;
@@ -33,11 +48,17 @@ function buyData(data, price) {
             price: price
         };
 
-        let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+addDoc(collection(db, "orders"), order)
+.then(() => {
 
-        orders.push(order);
+    console.log("Order saved to Firebase");
 
-        localStorage.setItem("CNDOrders", JSON.stringify(orders));
+})
+.catch((error) => {
+
+    console.error("Error saving order:", error);
+
+});
 
 
         let message =
