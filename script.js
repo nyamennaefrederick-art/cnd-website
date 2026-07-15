@@ -20,44 +20,38 @@ function buyData(data, price) {
 
     if(confirmOrder){
 
-let orderId = "CND" + Date.now();
+        let orderId = "CND" + Date.now();
+        let orderDate = new Date().toLocaleString();
 
-let message =
-"CND INSTANT DATA BUNDLE\n\n" +
-"Order ID: " + orderId +
-"\nCustomer Name: " + name +
-"\nPhone: " + phone +
-"\nNetwork: " + network +
-"\nData Package: " + data +
-"\nAmount: GHS " + price +
-"\n\nThank you for choosing CND.";
+        let order = {
+            id: orderId,
+            date: orderDate,
+            name: name,
+            phone: phone,
+            network: network,
+            data: data,
+            price: price
+        };
+
+        let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+        orders.push(order);
+
+        localStorage.setItem("CNDOrders", JSON.stringify(orders));
+
+
+        let message =
+        "CND INSTANT DATA BUNDLE\n\n" +
+        "Order ID: " + orderId +
+        "\nDate: " + orderDate +
+        "\nCustomer Name: " + name +
+        "\nPhone: " + phone +
+        "\nNetwork: " + network +
+        "\nData Package: " + data +
+        "\nAmount: GHS " + price;
+
 
         window.location.href =
         "https://wa.me/233543553686?text=" + encodeURIComponent(message);
     }
 }
-
-
-// Search
-document.addEventListener("DOMContentLoaded", function(){
-
-let search = document.getElementById("search");
-
-if(search){
-search.addEventListener("keyup", function(){
-
-let value = this.value.toLowerCase();
-
-document.querySelectorAll(".card").forEach(function(card){
-
-card.style.display =
-card.innerText.toLowerCase().includes(value)
-? "block"
-: "none";
-
-});
-
-});
-}
-
-});
