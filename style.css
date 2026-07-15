@@ -1,0 +1,205 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #008000;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    background: white;
+    color: green;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+section {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+}
+
+
+.home,
+.networks,
+.payment,
+.contact {
+    text-align: center;
+}
+
+
+.network-box {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+.network-box div {
+    padding: 15px;
+    background: green;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+
+
+select,
+input {
+    width: 90%;
+    max-width: 350px;
+    padding: 12px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+.cards {
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+
+}
+
+
+.card {
+
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 3px 8px #ccc;
+
+}
+
+
+button {
+
+    background: green;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+
+}
+
+
+button:hover {
+
+    opacity: 0.8;
+
+}
+
+
+.whatsapp {
+
+    display: inline-block;
+    background: green;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+
+}
+
+
+footer {
+
+    background: green;
+    color: white;
+    text-align: center;
+    padding: 20px;
+
+}
+
+
+
+@media(max-width:600px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+}.card {
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card button {
+    cursor: pointer;
+}
+
+.buy h2 {
+    color: green;
+}
+
+.payment h2,
+.contact h2 {
+    color: green;
+}
+
+.whatsapp {
+    background: #25D366;
+    font-weight: bold;
+
+}.network-box div:nth-child(1){
+    background: #ffcc00;
+    color: black;
+}
+
+.network-box div:nth-child(2){
+    background: red;
+    color: white;
+}
+
+.network-box div:nth-child(3){
+    background: blue;
+    color: white;
+}.logo {
+    box-shadow: 0 4px 10px #555;
+    letter-spacing: 2px;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+header p {
+    font-size: 16px;
+}.popular {
+    background: #ffcc00;
+    color: black;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}

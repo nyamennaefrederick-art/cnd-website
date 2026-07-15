@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CND Orders Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+h1{
+color:green;
+text-align:center;
+}
+
+.order{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 3px 8px #ccc;
+}
+
+button{
+background:red;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.clear{
+background:green;
+width:100%;
+margin-bottom:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>CND Customer Orders</h1>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+
+<div style="background:white;padding:15px;border-radius:10px;flex:1;">
+<b>Total Orders</b>
+<p id="dashboardTotal">0</p>
+</div>
+
+<div style="background:white;padding:15px;border-radius:10px;flex:1;">
+<b>Pending</b>
+<p id="dashboardPending">0</p>
+</div>
+
+<div style="background:white;padding:15px;border-radius:10px;flex:1;">
+<b>Completed</b>
+<p id="dashboardCompleted">0</p>
+</div>
+
+</div>
+
+
+<button class="clear" onclick="clearOrders()">Clear All Orders</button>
+
+<input id="searchOrder" type="text" placeholder="Search order..."
+style="width:100%;padding:12px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;">
+
+
+<div id="orders"></div>
+
+
+<div id="sales" style="background:white;padding:15px;margin-top:15px;border-radius:10px;font-weight:bold;">
+Total Sales: GHS 0
+</div>
+
+
+<div id="totalOrders" style="background:white;padding:15px;margin-top:15px;border-radius:10px;font-weight:bold;">
+Total Orders: 0
+</div>
+
+
+<script>
+
+function showOrders(){
+
+let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+let box = document.getElementById("orders");
+
+box.innerHTML="";
+
+
+if(orders.length === 0){
+
+box.innerHTML="<p>No orders yet</p>";
+
+showSales();
+showTotalOrders();
+updateDashboard();
+
+return;
+
+}
+
+
+orders.forEach(function(order,index){
+
+box.innerHTML += `
+
+<div class="order">
+
+<b>Order ID:</b> ${order.id}<br>
+<b>Date:</b> ${order.date}<br>
+<b>Name:</b> ${order.name}<br>
+<b>Phone:</b> ${order.phone}<br>
+<b>Network:</b> ${order.network}<br>
+<b>Data:</b> ${order.data}<br>
+<b>Price:</b> GHS ${order.price}<br>
+<b>Status:</b> ${order.status || "Pending"}<br><br>
+
+
+<button onclick="completeOrder(${index})" style="background:green;">
+Mark Completed
+</button>
+
+
+<button onclick="deleteOrder(${index})">
+Delete Order
+</button>
+
+</div>
+
+`;
+
+});
+
+
+showSales();
+showTotalOrders();
+updateDashboard();
+
+}
+
+
+function completeOrder(index){
+
+let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+orders[index].status="Completed";
+
+localStorage.setItem("CNDOrders",JSON.stringify(orders));
+
+showOrders();
+
+}
+
+
+function deleteOrder(index){
+
+let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+orders.splice(index,1);
+
+localStorage.setItem("CNDOrders",JSON.stringify(orders));
+
+showOrders();
+
+}
+
+
+
+function clearOrders(){
+
+let confirmClear = confirm("Delete all orders?");
+
+if(confirmClear){
+
+localStorage.removeItem("CNDOrders");
+
+showOrders();
+
+}
+
+}
+
+
+
+function showSales(){
+
+let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+let total=0;
+
+orders.forEach(function(order){
+
+total += Number(order.price);
+
+});
+
+
+document.getElementById("sales").innerHTML =
+"Total Sales: GHS " + total.toFixed(2);
+
+}
+
+
+
+function updateDashboard(){
+
+let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+let total=orders.length;
+
+let pending=0;
+
+let completed=0;
+
+
+orders.forEach(function(order){
+
+if(order.status==="Completed"){
+completed++;
+}else{
+pending++;
+}
+
+});
+
+
+document.getElementById("dashboardTotal").innerHTML=total;
+
+document.getElementById("dashboardPending").innerHTML=pending;
+
+document.getElementById("dashboardCompleted").innerHTML=completed;
+
+}
+
+
+
+function showTotalOrders(){
+
+let orders = JSON.parse(localStorage.getItem("CNDOrders")) || [];
+
+document.getElementById("totalOrders").innerHTML =
+"Total Orders: " + orders.length;
+
+}
+
+
+
+document.getElementById("searchOrder").addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+
+document.querySelectorAll(".order").forEach(function(order){
+
+if(order.innerText.toLowerCase().includes(value)){
+
+order.style.display="block";
+
+}else{
+
+order.style.display="none";
+
+}
+
+});
+
+});
+
+
+
+let password = prompt("Enter Admin Password:");
+
+if(password==="CND2026"){
+    showOrders();
+}else{
+    document.body.innerHTML=
+    "<h2 style='text-align:center;color:red;'>Access Denied</h2>";
+}
+
+
+</script>
+
+</body>
+</html>
