@@ -159,7 +159,13 @@ box.innerHTML += `
 <b>Phone:</b> ${order.phone}<br>
 <b>Network:</b> ${order.network}<br>
 <b>Data:</b> ${order.data}<br>
-<b>Price:</b> GHS ${order.price}<br><br>
+<b>Price:</b> GHS ${order.price}<br>
+<b>Status:</b> ${order.status || "Pending"}<br><br>
+
+<button onclick="completeOrder('${order.firestoreId}')"
+style="background:green;">
+Mark Completed
+</button>
 
 </div>
 
@@ -168,7 +174,15 @@ box.innerHTML += `
 });
 
 }
+async function completeOrder(id){
 
+await updateDoc(doc(db, "orders", id), {
+    status: "Completed"
+});
+
+showOrders();
+
+}
 
 document.getElementById("searchOrder").addEventListener("keyup",function(){
 
