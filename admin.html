@@ -180,6 +180,11 @@ Mark Completed
 style="background:red;">
 Delete Order
 </button>
+<button onclick="openWhatsApp('${order.phone}')"
+style="background:#25D366;">
+WhatsApp Customer
+</button>
+
 </div>
 
 `;
@@ -214,7 +219,18 @@ showOrders();
 }
 
 window.deleteOrder = deleteOrder;
+function openWhatsApp(phone){
 
+let message = "Hello, your CND Data Bundle order has been received.";
+
+window.open(
+"https://wa.me/" + phone + "?text=" + encodeURIComponent(message),
+"_blank"
+);
+
+}
+
+window.openWhatsApp = openWhatsApp;
 
 document.getElementById("searchOrder").addEventListener("keyup",function(){
 
