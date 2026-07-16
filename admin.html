@@ -166,7 +166,10 @@ box.innerHTML += `
 style="background:green;">
 Mark Completed
 </button>
-
+<button onclick="deleteOrder('${order.firestoreId}')"
+style="background:red;">
+Delete Order
+</button>
 </div>
 
 `;
@@ -184,6 +187,25 @@ showOrders();
 
 }
 window.completeOrder = completeOrder;
+
+
+async function deleteOrder(id){
+
+let confirmDelete = confirm("Delete this order?");
+
+if(confirmDelete){
+
+await deleteDoc(doc(db, "orders", id));
+
+showOrders();
+
+}
+
+}
+
+window.deleteOrder = deleteOrder;
+
+
 document.getElementById("searchOrder").addEventListener("keyup",function(){
 
 let value=this.value.toLowerCase();
