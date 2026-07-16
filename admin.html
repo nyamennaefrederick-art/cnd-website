@@ -147,6 +147,16 @@ orders.forEach(function(order){
 });
 document.getElementById("dashboardPending").innerHTML = pending;
 document.getElementById("dashboardCompleted").innerHTML = completed;
+let totalSales = 0;
+
+orders.forEach(function(order){
+
+    totalSales += Number(order.price);
+
+});
+
+document.getElementById("sales").innerHTML =
+"Total Sales: GHS " + totalSales.toFixed(2);
 orders.forEach(function(order,index){
 
 box.innerHTML += `
