@@ -183,7 +183,7 @@ await updateDoc(doc(db, "orders", id), {
 showOrders();
 
 }
-
+window.completeOrder = completeOrder;
 document.getElementById("searchOrder").addEventListener("keyup",function(){
 
 let value=this.value.toLowerCase();
