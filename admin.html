@@ -133,6 +133,20 @@ document.getElementById("totalOrders").innerHTML =
 
 document.getElementById("dashboardTotal").innerHTML = orders.length;
 
+let pending = 0;
+let completed = 0;
+
+orders.forEach(function(order){
+
+    if(order.status === "Completed"){
+        completed++;
+    } else {
+        pending++;
+    }
+
+});
+document.getElementById("dashboardPending").innerHTML = pending;
+document.getElementById("dashboardCompleted").innerHTML = completed;
 orders.forEach(function(order,index){
 
 box.innerHTML += `
