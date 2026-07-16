@@ -119,7 +119,9 @@ querySnapshot.forEach((doc) => {
     });
 
 });
-
+orders.sort((a,b) => {
+    return new Date(b.date) - new Date(a.date);
+});
 
 if(orders.length === 0){
 
