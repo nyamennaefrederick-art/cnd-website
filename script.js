@@ -38,15 +38,16 @@ function buyData(data, price) {
         let orderId = "CND" + Date.now();
         let orderDate = new Date().toLocaleString();
 
-        let order = {
-            id: orderId,
-            date: orderDate,
-            name: name,
-            phone: phone,
-            network: network,
-            data: data,
-            price: price
-        };
+let order = {
+    id: orderId,
+    date: orderDate,
+    name: name,
+    phone: phone,
+    network: network,
+    data: data,
+    price: price,
+    status: "Pending"
+};
 
 addDoc(collection(db, "orders"), order)
 .then(() => {
