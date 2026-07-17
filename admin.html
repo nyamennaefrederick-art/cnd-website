@@ -100,13 +100,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+let oldOrderCount = 0;
 
 async function showOrders(){
 
 let box = document.getElementById("orders");
 
 box.innerHTML = "";
-
 let orders = [];
 
 const querySnapshot = await getDocs(collection(db, "orders"));
@@ -127,9 +127,23 @@ if(orders.length === 0){
 
 box.innerHTML="<p>No orders yet</p>";
 
+oldOrderCount = 0;
+
 return;
 
 }
+
+
+if(oldOrderCount !== 0 && orders.length > oldOrderCount){
+
+let sound = new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+sound.play();
+
+alert("🔔 New CND Order Received!");
+
+}
+
+oldOrderCount = orders.length;
 document.getElementById("totalOrders").innerHTML =
 "Total Orders: " + orders.length;
 
