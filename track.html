@@ -98,6 +98,7 @@ querySnapshot.forEach((doc)=>{
 let order = doc.data();
 
 
+
 if(order.phone === phone){
 
 found = true;
@@ -111,9 +112,31 @@ result.innerHTML = `
 <b>Network:</b> ${order.network}<br>
 <b>Data:</b> ${order.data}<br>
 <b>Price:</b> GHS ${order.price}<br>
-<b>Status:</b> ${order.status}
+
+<b>Status:</b>
+<span id="status">${order.status}</span>
+
+<br><br>
+
+<p id="message"></p>
 
 `;
+
+let status = document.getElementById("status");
+let message = document.getElementById("message");
+
+
+if(order.status === "Completed"){
+
+status.style.color = "green";
+message.innerHTML = "✅ Your data bundle has been delivered.";
+
+}else{
+
+status.style.color = "orange";
+message.innerHTML = "⏳ Your order is being processed.";
+
+}
 
 }
 
