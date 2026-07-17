@@ -1,3 +1,4 @@
+console.log("CND script loaded");
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -77,5 +78,6 @@ addDoc(collection(db, "orders"), order)
 });
 
 }
+
 
 window.buyData = buyData;
