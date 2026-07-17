@@ -54,27 +54,28 @@ addDoc(collection(db, "orders"), order)
 
     console.log("Order saved to Firebase");
 
+    let message =
+    "CND INSTANT DATA BUNDLE\n\n" +
+    "Order ID: " + orderId +
+    "\nDate: " + orderDate +
+    "\nCustomer Name: " + name +
+    "\nPhone: " + phone +
+    "\nNetwork: " + network +
+    "\nData Package: " + data +
+    "\nAmount: GHS " + price;
+
+    window.location.href =
+    "https://wa.me/233543553686?text=" + encodeURIComponent(message);
+
 })
+
 .catch((error) => {
 
-    console.error("Error saving order:", error);
+    alert("Order failed. Try again.");
+    console.error(error);
 
 });
 
-
-        let message =
-        "CND INSTANT DATA BUNDLE\n\n" +
-        "Order ID: " + orderId +
-        "\nDate: " + orderDate +
-        "\nCustomer Name: " + name +
-        "\nPhone: " + phone +
-        "\nNetwork: " + network +
-        "\nData Package: " + data +
-        "\nAmount: GHS " + price;
-
-
-        window.location.href =
-        "https://wa.me/233543553686?text=" + encodeURIComponent(message);
-    }
 }
+
 window.buyData = buyData;
