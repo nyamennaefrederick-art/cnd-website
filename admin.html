@@ -261,6 +261,11 @@ let password = prompt("Enter Admin Password:");
 
 if(password==="CND2026"){
     showOrders();
+
+    setInterval(function(){
+        showOrders();
+    },10000);
+
 }else{
     document.body.innerHTML=
     "<h2 style='text-align:center;color:red;'>Access Denied</h2>";
