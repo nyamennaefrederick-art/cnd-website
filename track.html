@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Track My Order</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    font-family:Arial;
+    background:#f2f2f2;
+    padding:20px;
+}
+
+.container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    max-width:500px;
+    margin:auto;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:green;
+    color:white;
+    border:none;
+    border-radius:8px;
+}
+
+#result{
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Track Your Order</h2>
+
+<input
+id="phone"
+type="text"
+placeholder="Enter your phone number">
+
+<button onclick="trackOrder()">
+Track Order
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDpD5ShNaSByzGPxF1FlNGS0zgRZPAtnDg",
+  authDomain: "cnd-data-bundle.firebaseapp.com",
+  projectId: "cnd-data-bundle",
+  storageBucket: "cnd-data-bundle.firebasestorage.app",
+  messagingSenderId: "667849737543",
+  appId: "1:667849737543:web:a8571f7123483b4765f862",
+  measurementId: "G-PB7MHHHMYW"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+async function trackOrder(){
+
+let phone = document.getElementById("phone").value;
+
+let result = document.getElementById("result");
+
+result.innerHTML = "Searching...";
+
+
+const querySnapshot = await getDocs(collection(db,"orders"));
+
+let found = false;
+
+
+querySnapshot.forEach((doc)=>{
+
+let order = doc.data();
+
+
+if(order.phone === phone){
+
+found = true;
+
+result.innerHTML = `
+
+<h3>Order Found</h3>
+
+<b>Order ID:</b> ${order.id}<br>
+<b>Name:</b> ${order.name}<br>
+<b>Network:</b> ${order.network}<br>
+<b>Data:</b> ${order.data}<br>
+<b>Price:</b> GHS ${order.price}<br>
+<b>Status:</b> ${order.status}
+
+`;
+
+}
+
+});
+
+
+if(!found){
+
+result.innerHTML = "No order found.";
+
+}
+
+}
+
+window.trackOrder = trackOrder;
+
+</script>
+
+</body>
+</html>
