@@ -45,7 +45,17 @@ margin-bottom:20px;
 <body>
 
 <h1>CND Customer Orders</h1>
-
+<button onclick="logout()" style="
+background:#333;
+color:white;
+padding:12px;
+border:none;
+border-radius:8px;
+width:100%;
+margin-bottom:15px;
+">
+Logout
+</button>
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
 
 <div style="background:white;padding:15px;border-radius:10px;flex:1;">
@@ -271,20 +281,24 @@ order.style.display="none";
 
 
 
-let password = prompt("Enter Admin Password:");
+if(localStorage.getItem("cndAdmin")=="logged"){
 
-if(password==="CND2026"){
-    showOrders();
-
-    setInterval(function(){
-        showOrders();
-    },10000);
+showOrders();
 
 }else{
-    document.body.innerHTML=
-    "<h2 style='text-align:center;color:red;'>Access Denied</h2>";
+
+window.location.href="admin-login.html";
+
+}
+function logout(){
+
+localStorage.removeItem("cndAdmin");
+
+window.location.href="admin-login.html";
+
 }
 
+window.logout = logout;
 
 </script>
 
