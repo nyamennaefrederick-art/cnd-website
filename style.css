@@ -231,3 +231,11 @@ font-size:16px;
 footer p{
 margin:5px;
 }
+.card span{
+color:#008000;
+font-size:18px;
+}
+
+.popular-card{
+border:2px solid #ffcc00;
+}
