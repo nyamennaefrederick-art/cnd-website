@@ -79,5 +79,6 @@ addDoc(collection(db, "orders"), order)
 
 }
 
+}
 
 window.buyData = buyData;
