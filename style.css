@@ -248,18 +248,53 @@ color:#888;
 /* Data package style */
 
 
-
-.card{
-min-height:120px;
-}
-.card span{
-display:block;
-margin-top:8px;
-color:#008000;
-font-size:18px;
-}
-
 .popular-card{
 background:#fffbea;
 border:2px solid #ffcc00;
+}
+/* Professional Buy Button */
+
+.card button{
+background:linear-gradient(135deg,#008000,#00b300);
+box-shadow:0 3px 8px rgba(0,128,0,0.3);
+}
+
+.card button:active{
+transform:scale(0.95);
+}
+
+
+/* Data Price Highlight */
+
+.card span{
+background:#f0fff0;
+padding:5px 10px;
+border-radius:8px;
+display:inline-block;
+margin-top:8px;
+}
+@media(max-width:600px){
+
+.cards{
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.card{
+padding:15px;
+font-size:15px;
+}
+
+.card button{
+font-size:14px;
+padding:10px;
+}
+
+}
+.cards h3{
+grid-column:1/-1;
+text-align:center;
+color:#008000;
+font-size:22px;
+margin-top:25px;
 }
