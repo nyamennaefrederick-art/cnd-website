@@ -1,89 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Track My Order</title>
+<title>Track CND Order</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body{
-    font-family:Arial;
-    background:#f2f2f2;
-    padding:20px;
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
 }
 
-.container{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    max-width:500px;
-    margin:auto;
+h1{
+text-align:center;
+color:green;
 }
 
-input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
+input,button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:none;
 }
 
 button{
-    width:100%;
-    padding:12px;
-    background:green;
-    color:white;
-    border:none;
-    border-radius:8px;
+background:green;
+color:white;
+font-size:16px;
 }
 
-#result{
-    margin-top:20px;
+.order{
+background:white;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+box-shadow:0 3px 8px #ccc;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<h1>Track Your CND Order</h1>
 
-<h2>Track Your Order</h2>
+<input id="phone" placeholder="Enter your phone number">
 
-<input
-id="phone"
-type="text"
-placeholder="Enter your phone number">
+<button onclick="trackOrder()">Check Order</button>
 
-<button onclick="trackOrder()">
-Track Order
-</button>
-<a href="index.html">
-<button style="
-margin-top:10px;
-background:#333;
-">
-Back to Home
-</button>
-</a>
 <div id="result"></div>
 
-</div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDpD5ShNaSByzGPxF1FlNGS0zgRZPAtnDg",
-  authDomain: "cnd-data-bundle.firebaseapp.com",
-  projectId: "cnd-data-bundle",
-  storageBucket: "cnd-data-bundle.firebasestorage.app",
-  messagingSenderId: "667849737543",
-  appId: "1:667849737543:web:a8571f7123483b4765f862",
-  measurementId: "G-PB7MHHHMYW"
+apiKey: "AIzaSyDpD5ShNaSByzGPxF1FlNGS0zgRZPAtnDg",
+authDomain: "cnd-data-bundle.firebaseapp.com",
+projectId: "cnd-data-bundle",
+storageBucket: "cnd-data-bundle.firebasestorage.app",
+messagingSenderId: "667849737543",
+appId: "1:667849737543:web:a8571f7123483b4765f862"
 };
 
+
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
 
 
 async function trackOrder(){
@@ -92,73 +81,65 @@ let phone = document.getElementById("phone").value;
 
 let result = document.getElementById("result");
 
-result.innerHTML = "Searching...";
+result.innerHTML="Searching...";
 
 
-const querySnapshot = await getDocs(collection(db,"orders"));
+const q = query(
+collection(db,"orders"),
+where("phone","==",phone)
+);
 
-let found = false;
+
+const snapshot = await getDocs(q);
 
 
-querySnapshot.forEach((doc)=>{
+result.innerHTML="";
+
+
+if(snapshot.empty){
+
+result.innerHTML="<p>No order found.</p>";
+
+return;
+
+}
+
+
+snapshot.forEach((doc)=>{
+
 
 let order = doc.data();
 
 
+result.innerHTML += `
 
-if(order.phone === phone){
-
-found = true;
-
-result.innerHTML = `
-
-<h3>Order Found</h3>
+<div class="order">
 
 <b>Order ID:</b> ${order.id}<br>
-<b>Name:</b> ${order.name}<br>
+
+<b>Date:</b> ${order.date}<br>
+
 <b>Network:</b> ${order.network}<br>
-<b>Data:</b> ${order.data}<br>
-<b>Price:</b> GHS ${order.price}<br>
 
-<b>Status:</b>
-<span id="status">${order.status}</span>
+<b>Package:</b> ${order.data}<br>
 
-<br><br>
+<b>Amount:</b> GHS ${order.price}<br>
 
-<p id="message"></p>
+<b>Status:</b> ${order.status}
+
+</div>
 
 `;
 
-let status = document.getElementById("status");
-let message = document.getElementById("message");
-
-
-if(order.status === "Completed"){
-
-status.style.color = "green";
-message.innerHTML = "✅ Your data bundle has been delivered.";
-
-}else{
-
-status.style.color = "orange";
-message.innerHTML = "⏳ Your order is being processed.";
-
-}
-
-}
 
 });
 
 
-if(!found){
-
-result.innerHTML = "No order found.";
-
 }
 
-}
 
 window.trackOrder = trackOrder;
+
 
 </script>
 
