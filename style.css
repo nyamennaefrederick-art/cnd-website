@@ -211,3 +211,13 @@ font-weight:bold;
 .home-btn:hover{
 background:#006400;
 }
+.payment{
+text-align:center;
+}
+
+.payment-box{
+background:#ffcc00;
+padding:15px;
+border-radius:12px;
+font-weight:bold;
+}
