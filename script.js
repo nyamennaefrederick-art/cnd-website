@@ -35,7 +35,7 @@ function buyData(data, price) {
     );
 
     if(confirmOrder){
-
+alert("Processing your order...");
         let orderId = "CND" + Date.now();
         let orderDate = new Date().toLocaleString();
 
@@ -76,8 +76,6 @@ addDoc(collection(db, "orders"), order)
     console.error(error);
 
 });
-
-}
 
 }
 
