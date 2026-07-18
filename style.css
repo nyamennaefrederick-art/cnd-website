@@ -221,3 +221,10 @@ padding:15px;
 border-radius:12px;
 font-weight:bold;
 }
+.contact{
+text-align:center;
+}
+
+.contact p{
+font-size:16px;
+}
