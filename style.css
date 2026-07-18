@@ -42,11 +42,26 @@ gap:10px;
 
 .network-box div{
 flex:1;
-background:#222;
-color:white;
 padding:15px;
 text-align:center;
 border-radius:10px;
+font-weight:bold;
+color:white;
+}
+
+/* Network Colors */
+
+.network-box div:nth-child(1){
+background:#ffcc00;
+color:#000;
+}
+
+.network-box div:nth-child(2){
+background:#e60000;
+}
+
+.network-box div:nth-child(3){
+background:#009900;
 }
 
 /* Data Cards */
@@ -179,20 +194,7 @@ justify-content:center;
 grid-template-columns:repeat(2,1fr);
 }
 }
-.buy h2{
-text-align:center;
-color:#008000;
-}
 
-.buy select,
-.buy input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:16px;
-}
 .home{
 text-align:center;
 }
@@ -231,11 +233,33 @@ font-size:16px;
 footer p{
 margin:5px;
 }
+
+/* Buy Section */
+
+.buy{
+padding-top:25px;
+}
+
+
+
+.buy input::placeholder{
+color:#888;
+}
+/* Data package style */
+
+
+
+.card{
+min-height:120px;
+}
 .card span{
+display:block;
+margin-top:8px;
 color:#008000;
 font-size:18px;
 }
 
 .popular-card{
+background:#fffbea;
 border:2px solid #ffcc00;
 }
