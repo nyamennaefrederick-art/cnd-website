@@ -49,28 +49,66 @@ text-align:center;
 border-radius:10px;
 }
 
+/* Data Cards */
+
 .cards{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:20px;
 }
 
+
 .card{
-background:#f9f9f9;
-padding:15px;
+background:white;
+padding:20px;
 text-align:center;
-border-radius:10px;
+border-radius:15px;
 font-weight:bold;
+font-size:17px;
+border:1px solid #eee;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+transition:0.3s;
 }
+
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 18px rgba(0,0,0,0.15);
+}
+
 
 .card button{
 background:#008000;
 color:white;
 border:none;
-padding:10px;
-border-radius:8px;
-margin-top:10px;
+padding:12px;
+border-radius:10px;
+margin-top:15px;
 width:100%;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+
+.card button:hover{
+background:#006400;
+}
+
+
+/* Popular Package */
+
+.popular{
+background:linear-gradient(135deg,#008000,#00a000);
+color:white;
+padding:15px;
+border-radius:12px;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px;
 }
 
 .whatsapp{
@@ -137,5 +175,7 @@ gap:10px;
 flex-wrap:wrap;
 justify-content:center;
 }
-
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
 }
