@@ -179,3 +179,17 @@ justify-content:center;
 grid-template-columns:repeat(2,1fr);
 }
 }
+.buy h2{
+text-align:center;
+color:#008000;
+}
+
+.buy select,
+.buy input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+}
