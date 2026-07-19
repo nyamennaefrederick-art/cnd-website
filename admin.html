@@ -130,7 +130,7 @@ querySnapshot.forEach((doc) => {
 
 });
 orders.sort((a,b) => {
-    return new Date(b.date) - new Date(a.date);
+    return b.date.toMillis() - a.date.toMillis();
 });
 
 if(orders.length === 0){
@@ -190,11 +190,11 @@ box.innerHTML += `
 <div class="order">
 
 <b>Order ID:</b> ${order.id}<br>
-<b>Date:</b> ${order.date}<br>
+<b>Date:</b> ${order.date.toDate().toLocaleString()}<br>
 <b>Name:</b> ${order.name}<br>
 <b>Phone:</b> ${order.phone}<br>
 <b>Network:</b> ${order.network}<br>
-<b>Data:</b> ${order.data}<br>
+<b>Data:</b> ${order.package}<br>
 <b>Price:</b> GHS ${order.price}<br>
 <b>Status:</b> ${order.status || "Pending"}<br><br>
 
