@@ -1,36 +1,77 @@
-function trackOrder(){
+alert("Track JS loaded");
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDpD5ShNaSByzGPxF1FlNGS0zgRZPAtnDg",
+  authDomain: "cnd-data-bundle.firebaseapp.com",
+  projectId: "cnd-data-bundle",
+  storageBucket: "cnd-data-bundle.firebasestorage.app",
+  messagingSenderId: "667849737543",
+  appId: "1:667849737543:web:a8571f7123483b4765f862"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+window.trackOrder = async function(){
 
 let phone = document.getElementById("phone").value;
 
-let order = localStorage.getItem(phone);
+if(phone === ""){
+alert("Enter your phone number");
+return;
+}
 
-let result = document.getElementById("result");
+
+const q = query(
+collection(db,"orders"),
+where("phone","==",phone)
+);
 
 
-if(order){
+let result;
 
-let data = JSON.parse(order);
+try {
+  result = await getDocs(q);
+} catch(error) {
+  console.log(error);
+  alert("Firebase error: " + error.message);
+  return;
+}
 
-result.innerHTML = `
-<div class="order">
-<h3>Order Found ✅</h3>
-<p><b>Name:</b> ${data.name}</p>
-<p><b>Phone:</b> ${data.phone}</p>
-<p><b>Network:</b> ${data.network}</p>
-<p><b>Package:</b> ${data.package}</p>
-<p><b>Price:</b> GHS ${data.price}</p>
-<p><b>Status:</b> ${data.status}</p>
-</div>
-`;
+
+let output = document.getElementById("result");
+
+
+if(result.empty){
+
+output.innerHTML = "<p>No order found</p>";
 
 }else{
 
-result.innerHTML = `
+output.innerHTML = "";
+
+result.forEach((doc)=>{
+
+let order = doc.data();
+
+output.innerHTML += `
+
 <div class="order">
-No order found ❌<br>
-Check the phone number and try again.
+
+<p><b>Name:</b> ${order.name}</p>
+<p><b>Network:</b> ${order.network}</p>
+<p><b>Package:</b> ${order.package}</p>
+<p><b>Price:</b> GHS ${order.price}</p>
+<p><b>Status:</b> ${order.status}</p>
+
 </div>
+
 `;
+
+});
 
 }
 
