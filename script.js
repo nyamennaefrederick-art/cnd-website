@@ -20,9 +20,18 @@ let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
 let network = document.getElementById("network").value;
 
+let paymentMethod = document.getElementById("paymentMethod").value;
+let transactionId = document.getElementById("transactionId").value;
+let paymentPhone = document.getElementById("paymentPhone").value;
+
 
 if(name === "" || phone === ""){
 alert("Please enter your name and phone number");
+return;
+}
+
+if(paymentMethod === "" || transactionId === "" || paymentPhone === ""){
+alert("Please enter payment details");
 return;
 }
 
@@ -36,9 +45,14 @@ phone:phone,
 network:network,
 package:data,
 price:price,
+
+paymentMethod:paymentMethod,
+transactionId:transactionId,
+paymentPhone:paymentPhone,
+
+paymentStatus:"Pending Verification",
 status:"Pending",
-date:serverTimestamp(),
-orderId: "CND-" + Date.now()
+date:serverTimestamp()
 
 });
 
@@ -52,7 +66,10 @@ let message =
 "\nPhone: "+phone+
 "\nNetwork: "+network+
 "\nPackage: "+data+
-"\nPrice: GHS "+price;
+"\nPrice: GHS "+price+
+"\nPayment Method: "+paymentMethod+
+"\nTransaction ID: "+transactionId+
+"\nPayment Phone: "+paymentPhone;
 
 
 window.open(
