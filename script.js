@@ -29,7 +29,7 @@ return;
 
 try{
 
-await addDoc(collection(db,"orders"),{
+let orderRef = await addDoc(collection(db,"orders"),{
 
 name:name,
 phone:phone,
@@ -37,7 +37,8 @@ network:network,
 package:data,
 price:price,
 status:"Pending",
-date:serverTimestamp()
+date:serverTimestamp(),
+orderId: "CND-" + Date.now()
 
 });
 

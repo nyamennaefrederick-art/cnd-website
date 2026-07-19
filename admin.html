@@ -130,7 +130,12 @@ querySnapshot.forEach((doc) => {
 
 });
 orders.sort((a,b) => {
-    return b.date.toMillis() - a.date.toMillis();
+
+let dateA = a.date?.toMillis ? a.date.toMillis() : 0;
+let dateB = b.date?.toMillis ? b.date.toMillis() : 0;
+
+return dateB - dateA;
+
 });
 
 if(orders.length === 0){
@@ -183,14 +188,27 @@ orders.forEach(function(order){
 
 document.getElementById("sales").innerHTML =
 "Total Sales: GHS " + totalSales.toFixed(2);
+
 orders.forEach(function(order,index){
+
+let orderDate = "No date";
+
+if(order.date){
+
+if(order.date.toDate){
+
+orderDate = order.date.toDate().toLocaleString("en-GH");
+
+}
+
+}
 
 box.innerHTML += `
 
 <div class="order">
 
-<b>Order ID:</b> ${order.id}<br>
-<b>Date:</b> ${order.date.toDate().toLocaleString()}<br>
+<b>Order ID:</b> ${order.orderId || order.firestoreId}<br>
+<b>Date:</b> ${orderDate}<br>
 <b>Name:</b> ${order.name}<br>
 <b>Phone:</b> ${order.phone}<br>
 <b>Network:</b> ${order.network}<br>
