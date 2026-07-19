@@ -193,13 +193,17 @@ orders.forEach(function(order,index){
 
 let orderDate = "No date";
 
-if(order.date){
+if(order.date && order.date.toDate){
 
-if(order.date.toDate){
-
-orderDate = order.date.toDate().toLocaleString("en-GH");
-
-}
+orderDate = order.date.toDate().toLocaleString("en-GH", {
+  timeZone: "Africa/Accra",
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit"
+});
 
 }
 
