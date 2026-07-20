@@ -8,27 +8,22 @@
 body{
 font-family:Arial;
 background:#f2f2f2;
-padding:30px;
+padding:20px;
 }
 
 .box{
 background:white;
+padding:20px;
+border-radius:10px;
 max-width:400px;
 margin:auto;
-padding:25px;
-border-radius:10px;
-box-shadow:0 3px 10px #ccc;
 }
 
 input,button{
 width:100%;
 padding:12px;
-margin-top:15px;
+margin-top:10px;
 border-radius:8px;
-}
-
-input{
-border:1px solid #ccc;
 }
 
 button{
@@ -46,41 +41,16 @@ border:none;
 
 <h2>CND Admin Login</h2>
 
-<input id="password" type="password" placeholder="Enter Password">
+<input id="email" type="email" placeholder="Admin Email">
 
-<button onclick="login()">
-Login
-</button>
+<input id="password" type="password" placeholder="Password">
 
-<p id="message"></p>
+<button onclick="login()">Login</button>
 
 </div>
 
 
-<script>
-
-function login(){
-
-let password = document.getElementById("password").value;
-
-
-if(password === "CND2026"){
-
-localStorage.setItem("cndAdmin","logged");
-
-window.location.href="admin.html";
-
-
-}else{
-
-document.getElementById("message").innerHTML=
-"Wrong Password";
-
-}
-
-}
-
-</script>
+<script type="module" src="admin-login.js"></script>
 
 </body>
 </html>
