@@ -1,4 +1,3 @@
-alert("Track JS loaded");
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
@@ -17,7 +16,7 @@ const db = getFirestore(app);
 
 window.trackOrder = async function(){
 
-let phone = document.getElementById("phone").value;
+let phone = document.getElementById("phone").value.trim();
 
 if(phone === ""){
 alert("Enter your phone number");
@@ -61,11 +60,19 @@ output.innerHTML += `
 
 <div class="order">
 
+<p><b>Order ID:</b> ${order.orderId || doc.id}</p>
+
 <p><b>Name:</b> ${order.name}</p>
+
 <p><b>Network:</b> ${order.network}</p>
+
 <p><b>Package:</b> ${order.package}</p>
+
 <p><b>Price:</b> GHS ${order.price}</p>
-<p><b>Status:</b> ${order.status}</p>
+
+<p><b>Payment Status:</b> ${order.paymentStatus || "Waiting for Payment"}</p>
+
+<p><b>Order Status:</b> ${order.status || "Pending"}</p>
 
 </div>
 
