@@ -30,11 +30,6 @@ alert("Please enter your name and phone number");
 return;
 }
 
-if(paymentMethod === "" || transactionId === "" || paymentPhone === ""){
-alert("Please enter payment details");
-return;
-}
-
 
 try{
 
