@@ -46,9 +46,9 @@ network:network,
 package:data,
 price:price,
 
-paymentMethod:paymentMethod,
-transactionId:transactionId,
-paymentPhone:paymentPhone,
+paymentMethod: paymentMethod,
+transactionId: transactionId,
+paymentPhone: paymentPhone,
 
 paymentStatus:"Pending Verification",
 status:"Pending",

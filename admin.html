@@ -213,21 +213,46 @@ box.innerHTML += `
 
 <b>Order ID:</b> ${order.orderId || order.firestoreId}<br>
 <b>Date:</b> ${orderDate}<br>
+
 <b>Name:</b> ${order.name}<br>
 <b>Phone:</b> ${order.phone}<br>
 <b>Network:</b> ${order.network}<br>
+
 <b>Data:</b> ${order.package}<br>
 <b>Price:</b> GHS ${order.price}<br>
-<b>Status:</b> ${order.status || "Pending"}<br><br>
+
+<hr>
+
+<b>Payment Method:</b> ${order.paymentMethod || "Not Provided"}<br>
+<b>Transaction ID:</b> ${order.transactionId || "Not Provided"}<br>
+<b>Payment Phone:</b> ${order.paymentPhone || "Not Provided"}<br>
+<b>Payment Status:</b>
+<span style="color:${order.paymentStatus === 'Verified' ? 'green' : 'orange'};font-weight:bold;">
+${order.paymentStatus || "Pending Verification"}
+</span>
+
+<hr>
+
+<b>Order Status:</b>
+<span style="color:${order.status === "Completed" ? "green" : "red"};font-weight:bold;">
+${order.status || "Pending"}
+</span><br><br>
+
+<button onclick="verifyPayment('${order.firestoreId}')"
+style="background:blue;">
+Verify Payment
+</button>
 
 <button onclick="completeOrder('${order.firestoreId}')"
 style="background:green;">
 Mark Completed
 </button>
+
 <button onclick="deleteOrder('${order.firestoreId}')"
 style="background:red;">
 Delete Order
 </button>
+
 <button onclick="openWhatsApp('${order.phone}')"
 style="background:#25D366;">
 WhatsApp Customer
@@ -251,6 +276,20 @@ showOrders();
 }
 window.completeOrder = completeOrder;
 
+async function verifyPayment(id){
+
+await updateDoc(doc(db,"orders",id),{
+
+paymentStatus:"Verified",
+verifiedAt: new Date()
+
+});
+
+showOrders();
+
+}
+
+window.verifyPayment = verifyPayment;
 
 async function deleteOrder(id){
 
