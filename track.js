@@ -72,7 +72,17 @@ output.innerHTML += `
 
 <p><b>Payment Status:</b> ${order.paymentStatus || "Waiting for Payment"}</p>
 
-<p><b>Order Status:</b> ${order.status || "Pending"}</p>
+<p><b>Order Status:</b> 
+${order.status || "Pending"}
+</p>
+
+<p><b>Message:</b>
+${
+order.status === "Data Sent" 
+? "Your data bundle has been sent successfully ✅"
+: "Your order is being processed..."
+}
+</p>
 
 </div>
 

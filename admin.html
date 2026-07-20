@@ -242,7 +242,10 @@ ${order.status || "Pending"}
 style="background:blue;">
 Verify Payment
 </button>
-
+<button onclick="dataSent('${order.firestoreId}')"
+style="background:purple;">
+Data Sent
+</button>
 <button onclick="completeOrder('${order.firestoreId}')"
 style="background:green;">
 Mark Completed
@@ -290,7 +293,19 @@ showOrders();
 }
 
 window.verifyPayment = verifyPayment;
+async function dataSent(id){
 
+await updateDoc(doc(db,"orders",id),{
+
+status:"Data Sent"
+
+});
+
+showOrders();
+
+}
+
+window.dataSent = dataSent;
 async function deleteOrder(id){
 
 let confirmDelete = confirm("Delete this order?");
