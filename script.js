@@ -32,9 +32,9 @@ return;
 
 
 try{
-
+let orderId = "CND-" + Math.floor(100000 + Math.random() * 900000);
 let orderRef = await addDoc(collection(db,"orders"),{
-
+orderId: orderId,
 name:name,
 phone:phone,
 network:network,
