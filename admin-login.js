@@ -22,20 +22,14 @@ window.login = async function(){
 let email = document.getElementById("email").value;
 let password = document.getElementById("password").value;
 
-
 if(email === "" || password === ""){
-
 alert("Enter email and password");
 return;
-
 }
-
 
 try{
 
 await signInWithEmailAndPassword(auth,email,password);
-
-localStorage.setItem("cndAdmin","logged");
 
 alert("Login successful");
 
