@@ -95,9 +95,12 @@ Total Orders: 0
 
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+import { getFirestore, collection, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 const firebaseConfig = {
   apiKey: "AIzaSyDpD5ShNaSByzGPxF1FlNGS0zgRZPAtnDg",
   authDomain: "cnd-data-bundle.firebaseapp.com",
@@ -110,6 +113,21 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user)=>{
+
+if(user){
+
+showOrders();
+
+}else{
+
+window.location.href="admin-login.html";
+
+}
+
+});
 let oldOrderCount = 0;
 
 async function showOrders(){
@@ -355,20 +373,9 @@ order.style.display="none";
 
 });
 
+async function logout(){
 
-
-if(localStorage.getItem("cndAdmin")=="logged"){
-
-showOrders();
-
-}else{
-
-window.location.href="admin-login.html";
-
-}
-function logout(){
-
-localStorage.removeItem("cndAdmin");
+await signOut(auth);
 
 window.location.href="admin-login.html";
 
