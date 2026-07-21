@@ -255,7 +255,10 @@ ${order.paymentStatus || "Pending Verification"}
 <span style="color:${order.status === "Completed" ? "green" : "red"};font-weight:bold;">
 ${order.status || "Pending"}
 </span><br><br>
+<br>
 
+<b>Data Sent Time:</b>
+${order.sentAt ? new Date(order.sentAt.seconds * 1000).toLocaleString() : "Not Sent Yet"}
 <button onclick="verifyPayment('${order.firestoreId}')"
 style="background:blue;">
 Verify Payment
@@ -315,7 +318,8 @@ async function dataSent(id){
 
 await updateDoc(doc(db,"orders",id),{
 
-status:"Data Sent"
+status:"Data Sent",
+sentAt: new Date()
 
 });
 

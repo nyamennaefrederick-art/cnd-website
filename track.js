@@ -71,9 +71,13 @@ output.innerHTML += `
 <p><b>Price:</b> GHS ${order.price}</p>
 
 
-<p><b>Order Status:</b> 
-${order.status || "Pending"}
-</p>
+<p><b>Order Status:</b> ${
+order.status === "Completed" 
+? "Completed ✅" 
+: order.status === "Data Sent" 
+? "Data Sent ✅"
+: "Your order is being processed ⏳"
+}</p>
 
 <p><b>Message:</b>
 ${
