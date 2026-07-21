@@ -70,7 +70,6 @@ output.innerHTML += `
 
 <p><b>Price:</b> GHS ${order.price}</p>
 
-<p><b>Payment Status:</b> ${order.paymentStatus || "Waiting for Payment"}</p>
 
 <p><b>Order Status:</b> 
 ${order.status || "Pending"}
