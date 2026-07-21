@@ -78,6 +78,11 @@ order.status === "Completed"
 ? "Data Sent ✅"
 : "Your order is being processed ⏳"
 }</p>
+<p><b>Data Sent Time:</b> ${
+order.sentAt 
+? new Date(order.sentAt.seconds * 1000).toLocaleString()
+: "Not Sent Yet"
+}</p>
 
 <p><b>Message:</b>
 ${
