@@ -36,7 +36,17 @@ font-size:28px;
 font-weight:bold;
 margin:10px 0;
 }
+.total-card{
+border-top:5px solid blue;
+}
 
+.pending-card{
+border-top:5px solid orange;
+}
+
+.completed-card{
+border-top:5px solid green;
+}
 .admin-header{
 background:linear-gradient(135deg,#008000,#00b300);
 color:white;
@@ -100,18 +110,17 @@ margin-bottom:15px;
 ">
 Logout
 </button>
-<div class="dashboard-cards">
-<div class="dashboard-card">
+<div class="dashboard-card total-card">
 <b>Total Orders</b>
 <p id="dashboardTotal">0</p>
 </div>
 
-<div class="dashboard-card">
+<div class="dashboard-card pending-card">
 <b>Pending</b>
 <p id="dashboardPending">0</p>
 </div>
 
-<div class="dashboard-card">
+<div class="dashboard-card completed-card">
 <b>Completed</b>
 <p id="dashboardCompleted">0</p>
 </div>
