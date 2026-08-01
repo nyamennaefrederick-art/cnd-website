@@ -589,3 +589,27 @@ padding:8px;
 footer{
 padding:8px;
 }
+/* Fix network logo position */
+
+.network-box{
+display:flex;
+flex-direction:row;
+justify-content:center;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.network-logo{
+width:90px;
+height:45px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.network-logo h3{
+margin:0;
+font-size:14px;
+}
