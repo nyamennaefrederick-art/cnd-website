@@ -20,9 +20,6 @@ let name = document.getElementById("name").value;
 let phone = document.getElementById("phone").value;
 let network = document.getElementById("network").value;
 
-let paymentMethod = document.getElementById("paymentMethod").value;
-let transactionId = document.getElementById("transactionId").value;
-let paymentPhone = document.getElementById("paymentPhone").value;
 
 
 if(name === "" || phone === ""){
@@ -41,9 +38,6 @@ network:network,
 package:data,
 price:price,
 
-paymentMethod: paymentMethod,
-transactionId: transactionId,
-paymentPhone: paymentPhone,
 
 paymentStatus:"Pending Verification",
 status:"Pending",
@@ -57,14 +51,13 @@ alert("Order received successfully");
 
 let message =
 "CND Instant Data Bundle Order\n\n"+
-"Name: "+name+
-"\nPhone: "+phone+
-"\nNetwork: "+network+
-"\nPackage: "+data+
-"\nPrice: GHS "+price+
-"\nPayment Method: "+paymentMethod+
-"\nTransaction ID: "+transactionId+
-"\nPayment Phone: "+paymentPhone;
+"Order ID: " + orderId +
+"\nName: " + name +
+"\nPhone: " + phone +
+"\nNetwork: " + network +
+"\nPackage: " + data +
+"\nPrice: GHS " + price +
+"\n\nI have placed my order and I will send my payment proof shortly.";
 
 
 window.open(
