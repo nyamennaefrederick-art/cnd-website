@@ -698,3 +698,46 @@ flex-direction:column;
 }
 
 }
+/* Small Trust Section */
+
+.trust{
+padding:10px;
+margin:10px;
+}
+
+.trust h2{
+font-size:18px;
+margin:5px;
+}
+
+.trust-box{
+display:flex;
+gap:8px;
+}
+
+.trust-box div{
+padding:8px;
+border-radius:8px;
+}
+
+.trust-box h3{
+font-size:13px;
+margin:5px 0;
+}
+
+.trust-box p{
+font-size:11px;
+margin:3px 0;
+}
+
+@media(max-width:600px){
+
+.trust-box{
+flex-direction:column;
+}
+
+.trust-box div{
+padding:6px;
+}
+
+}
